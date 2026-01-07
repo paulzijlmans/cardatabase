@@ -1,4 +1,12 @@
-import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, type ChangeEvent } from "react";
 import { updateCar } from "../api/carapi";
@@ -69,7 +77,11 @@ function EditCar({ cardata }: FormProps) {
 
   return (
     <>
-      <button onClick={handleClickOpen}>Edit</button>
+      <Tooltip title="Edit car">
+        <IconButton aria-label="edit" size="small" onClick={handleClickOpen}>
+          <EditIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit Car</DialogTitle>
         <CarDialogContent car={car} handleChange={handleChange} />
