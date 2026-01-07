@@ -1,5 +1,5 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Snackbar, Tooltip } from "@mui/material";
+import { Button, IconButton, Snackbar, Stack, Tooltip } from "@mui/material";
 import {
   DataGrid,
   type GridCellParams,
@@ -11,7 +11,11 @@ import { deleteCar, getCars } from "../api/carapi";
 import AddCar from "./AddCar";
 import EditCar from "./EditCar";
 
-function Carlist() {
+type CarlistProps = {
+  logout?: () => void;
+};
+
+function Carlist({ logout }: CarlistProps) {
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
@@ -87,7 +91,10 @@ function Carlist() {
 
   return (
     <>
-      <AddCar />
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <AddCar />
+        <Button onClick={logout}>Logout</Button>
+      </Stack>
       <DataGrid
         rows={data}
         columns={columns}
